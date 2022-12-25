@@ -35,8 +35,14 @@ public class Login_Steps {
         driver.get("http://www.webdriveruniversity.com/Login-Portal/index.html?");
     }
     @When("I enter a specific username {string}")
+    public void i_enter_a_username_webdriver(String username) {
+        driver.findElement(By.cssSelector("input#text")).sendKeys(username);
+
+    }
+    @When("I enter a specific username {word}")
     public void i_enter_a_specific_username_webdriver(String username) {
         driver.findElement(By.cssSelector("input#text")).sendKeys(username);
+
     }
     @And("I enter a specific password {}")
     public void i_enter_a_specific_password_webdriver123(String password) {
@@ -50,5 +56,16 @@ public class Login_Steps {
     public void i_should_be_presented_with_a_successful_login_validation_message() {
         String login_Message = driver.switchTo().alert().getText();
         Assert.assertEquals(login_Message,"validation succeeded");
+    }
+    @Then("I should be presented with an unsuccessful login validation message")
+    public void i_should_be_presented_with_an_unsuccessful_login_validation_message() {
+        String login_Message = driver.switchTo().alert().getText();
+        Assert.assertEquals(login_Message,"validation failed");
+    }
+
+    @Then("I should be presented with the following login validation message {}")
+    public void i_should_be_presented_with_the_following_login_validation_message_validation_succeeded(String expectedMessage) {
+        String login_Message = driver.switchTo().alert().getText();
+        Assert.assertEquals(login_Message,expectedMessage);
     }
 }
