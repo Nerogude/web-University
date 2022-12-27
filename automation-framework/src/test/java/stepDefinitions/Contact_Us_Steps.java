@@ -1,37 +1,24 @@
 package stepDefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.PageLoadStrategy;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
+
 import org.testng.Assert;
 
+import static driver.DriverFactory.getDriver;
+
+
 public class Contact_Us_Steps {
-    private WebDriver driver;
+    private WebDriver driver = getDriver();
 
-    @Before("@contact-us")
-    public void setup() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Nero\\Desktop\\Resources\\CucumberWorkSpace\\automation-framework\\src\\main\\java\\drivers\\chromedriver.exe");
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        driver = new ChromeDriver(chromeOptions);
-        driver.manage().window().maximize();
-    }
-
-    @After("@contact-us")
-    public void tearDown() {
-        driver.quit();
-    }
 
     public String generateRandomNumber(int length){
         return RandomStringUtils.randomNumeric(length);

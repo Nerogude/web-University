@@ -1,46 +1,27 @@
 package stepDefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
-import org.openqa.selenium.PageLoadStrategy;
+
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 
-public class Login_Steps {
+import static driver.DriverFactory.getDriver;
 
-    private WebDriver driver;
 
-    @Before("@login")
-    public void setup(){
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Nero\\Desktop\\Resources\\CucumberWorkSpace\\automation-framework\\src\\main\\java\\drivers\\chromedriver.exe");
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        driver = new ChromeDriver(chromeOptions);
-        driver.manage().window().maximize();
-    }
+public class Login_Steps  {
+    private WebDriver driver = getDriver();
 
-    @After("@login")
-    public void teardown(){
-        driver.quit();
-    }
     @Given("I access the webdriver university login page")
     public void i_access_the_webdriver_university_login_page() {
         driver.get("http://www.webdriveruniversity.com/Login-Portal/index.html?");
     }
-    @When("I enter a specific username {string}")
+    @When("I enter a specific username {}")
     public void i_enter_a_username_webdriver(String username) {
-        driver.findElement(By.cssSelector("input#text")).sendKeys(username);
-
-    }
-    @When("I enter a specific username {word}")
-    public void i_enter_a_specific_username_webdriver(String username) {
         driver.findElement(By.cssSelector("input#text")).sendKeys(username);
 
     }
