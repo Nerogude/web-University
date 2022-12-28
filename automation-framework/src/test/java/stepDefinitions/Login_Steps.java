@@ -9,20 +9,21 @@ import org.openqa.selenium.By;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import pageObjects.Base_PO;
 
-import static driver.DriverFactory.getDriver;
 
 
-public class Login_Steps  {
+public class Login_Steps extends Base_PO {
     private WebDriver driver = getDriver();
 
     @Given("I access the webdriver university login page")
     public void i_access_the_webdriver_university_login_page() {
-        driver.get("http://www.webdriveruniversity.com/Login-Portal/index.html?");
+        navigateTo_URL("http://www.webdriveruniversity.com/Login-Portal/index.html?");
     }
     @When("I enter a specific username {}")
     public void i_enter_a_username_webdriver(String username) {
         driver.findElement(By.cssSelector("input#text")).sendKeys(username);
+
 
     }
     @And("I enter a specific password {}")
