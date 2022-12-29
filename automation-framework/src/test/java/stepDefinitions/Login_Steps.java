@@ -5,16 +5,9 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
-
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import pageObjects.Base_PO;
 import pageObjects.Login_PO;
-
-
 public class Login_Steps extends Base_PO {
-    private WebDriver driver = getDriver();
 
     private Login_PO login_po;
     public Login_Steps(Login_PO login_po){
@@ -28,8 +21,6 @@ public class Login_Steps extends Base_PO {
     @When("I enter a specific username {}")
     public void i_enter_a_username_webdriver(String username) {
        login_po.setUsername(username);
-
-
     }
     @And("I enter a specific password {}")
     public void i_enter_a_specific_password_webdriver123(String password) {
@@ -41,18 +32,15 @@ public class Login_Steps extends Base_PO {
     }
     @Then("I should be presented with a successful login validation message")
     public void i_should_be_presented_with_a_successful_login_validation_message() {
-        String login_Message = driver.switchTo().alert().getText();
-        Assert.assertEquals(login_Message,"validation succeeded");
+       login_po.validate_SuccessfulLogin_Message();
     }
     @Then("I should be presented with an unsuccessful login validation message")
     public void i_should_be_presented_with_an_unsuccessful_login_validation_message() {
-        String login_Message = driver.switchTo().alert().getText();
-        Assert.assertEquals(login_Message,"validation failed");
+        login_po.validate_UnSuccessfulLogin_Message();
     }
 
     @Then("I should be presented with the following login validation message {}")
     public void i_should_be_presented_with_the_following_login_validation_message_validation_succeeded(String expectedMessage) {
-        String login_Message = driver.switchTo().alert().getText();
-        Assert.assertEquals(login_Message,expectedMessage);
+       waitForAlert_And_ValidateText(expectedMessage);
     }
 }
