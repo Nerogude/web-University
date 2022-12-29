@@ -10,29 +10,34 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import pageObjects.Base_PO;
-
+import pageObjects.Login_PO;
 
 
 public class Login_Steps extends Base_PO {
     private WebDriver driver = getDriver();
 
+    private Login_PO login_po;
+    public Login_Steps(Login_PO login_po){
+        this.login_po = login_po;
+    }
+
     @Given("I access the webdriver university login page")
     public void i_access_the_webdriver_university_login_page() {
-        navigateTo_URL("http://www.webdriveruniversity.com/Login-Portal/index.html?");
+        login_po.navigateTo_WebDriverUniversity_Login_Page();
     }
     @When("I enter a specific username {}")
     public void i_enter_a_username_webdriver(String username) {
-        driver.findElement(By.cssSelector("input#text")).sendKeys(username);
+       login_po.setUsername(username);
 
 
     }
     @And("I enter a specific password {}")
     public void i_enter_a_specific_password_webdriver123(String password) {
-      driver.findElement(By.cssSelector("input#password")).sendKeys(password);
+      login_po.setPassword(password);
     }
     @And("I click on the login button")
     public void i_click_on_the_login_button() {
-       driver.findElement(By.cssSelector("button#login-button")).click();
+       login_po.clickOn_Login_Button();
     }
     @Then("I should be presented with a successful login validation message")
     public void i_should_be_presented_with_a_successful_login_validation_message() {

@@ -5,7 +5,7 @@ Feature: WebDriver University - Login Page
   Background:
     Given I access the webdriver university login page
 
-    @smoke
+    @login1
   Scenario: Validate Successful Login - Specific Data
     When I enter a specific username webdriver
     And I enter a specific password webdriver123
